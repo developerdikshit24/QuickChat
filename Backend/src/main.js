@@ -1,20 +1,26 @@
 import './utils/socket.js';
 import dotenv from "dotenv"
 import connectDB from './db/index.js';
-import { httpServer } from "./app.js";
-
+import { app, httpServer } from "./app.js";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import express from 'express';
+import path from 'path';
 
 dotenv.config({
     path: "./.env"
 })
 
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const requiredEnvVars = ['CORS_ORIGIN', 'PORT', 'MONGODB_URI'];
-for (const envVar of requiredEnvVars) {
-    if (!process.env[envVar]) {
-        throw new Error(`${envVar} is required in environment variables`);
-    }
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, "../../Frontend/QuickChat/dist")))
+
+    app.get('/app/v1/', (req, res) => {
+        res.sendFile(path.join(__dirname, "../Frontend", "QuickChat", "dist", "index.html"))
+    })
 }
 
 connectDB()

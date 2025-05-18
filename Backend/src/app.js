@@ -2,15 +2,11 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
 import http from "http"
-import path from 'path';
 
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+
 const app = express();
 export const httpServer = http.createServer(app)
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 app.use(cors({
     origin: `${process.env.CORS_ORIGIN}`,
@@ -32,13 +28,6 @@ import messageRouter from "./routers/message.route.js"
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/messages", messageRouter)
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, "../../Frontend/QuickChat/dist")))
-
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, "../../Frontend", "QuickChat", "dist", "index.html"))
-    })
-}
 
 
 export { app }
