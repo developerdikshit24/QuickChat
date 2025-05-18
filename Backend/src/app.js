@@ -32,12 +32,13 @@ import messageRouter from "./routers/message.route.js"
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/messages", messageRouter)
 
-// Static file serving and client routing
-app.use(express.static(path.join(__dirname, "../../Frontend/QuickChat/dist")))
-app.get('*', (req, res) => {
-    if (!req.url.startsWith('/api/')) {
-        res.sendFile(path.join(__dirname, "../../Frontend/QuickChat/dist/index.html"))
-    }
-})
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, "../../Frontend/QuickChat/dist")))
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, "../../Frontend", "QuickChat", "dist", "index.html"))
+    })
+}
+
 
 export { app }
