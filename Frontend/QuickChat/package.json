@@ -15,6 +15,8 @@
     "@tailwindcss/vite": "^4.1.4",
     "@vitejs/plugin-react": "^4.4.1",
     "axios": "^1.9.0",
+    "express": "^4.18.2",
+    "path-to-regexp": "^6.2.1",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.507.0",
     "quickchat": "file:../..",
