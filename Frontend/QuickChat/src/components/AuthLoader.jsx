@@ -13,7 +13,6 @@ const AuthLoader = ({ children }) => {
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
-                console.error("Auth check failed:", error);
             }
         };
 
