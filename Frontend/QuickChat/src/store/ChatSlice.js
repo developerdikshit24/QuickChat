@@ -42,9 +42,9 @@ export const getAllUserThunk = createAsyncThunk('auth/getAllUser', async (_, { r
 , data    }
 })
 
-export const deletedMsgThunk = createAsyncThunk('auth/deleteChats', async (userId, { dispatch, rejectWithValue }) => {
+export const deletedMsgThunk = createAsyncThunk('auth/delete-chats', async (userId, { dispatch, rejectWithValue }) => {
     try {
-        const deleteChats = await axiosInstance.get(`/messages/deleteChats/${userId}`);
+        const deleteChats = await axiosInstance.get(`/messages/delete-chats/${userId}`);
         return deleteChats.data.data
     } catch (error) {
         return rejectWithValue(error)

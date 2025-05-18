@@ -16,6 +16,6 @@ router.route("/getSideBarMsg").get(verifyJWT, getSideBarMessages)
 router.route("/getUserChats/:id").get(verifyJWT, getUserChats)
 router.route("/getSelectedUser/:id").get(verifyJWT, getSelectedUser)
 router.route("/chatWithAi").get(verifyJWT, chatWithAi)
-router.route("/deleteChats/:id").get(verifyJWT, deleteChats)
+router.route("/delete-chats/:id").get(verifyJWT, deleteChats)
 
 export default router
