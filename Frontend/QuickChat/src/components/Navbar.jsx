@@ -14,13 +14,13 @@ const Navbar = () => {
 
   return (
     <div className={`
-      ${selectedChat ? "hidden xl:flex" : "flex"}
+      ${selectedChat ? "hidden xl:flex " : "flex"}
       fixed md:static  bg-purple-950 text-base-content z-50
       w-full h-16 rounded-tl-3xl md:rounded-xs rounded-tr-3xl bottom-0 flex-row
       md:w-16 md:h-screen md:top-0 md:left-0 md:bottom-auto md:flex-col
       `}>
       <div className='flex flex-1 md:flex-col md:w-full md:justify-between md:h-full md:overflow-y-auto'>
-        <div className='flex md:flex-col md:ml-3 gap-[11%] md:gap-9 md:w-3/5 w-full items-center justify-center md:mt-8'>
+        <div className='flex md:flex-col md:ml-3 gap-[9%] md:gap-9 md:w-3/5 w-full items-center justify-center md:mt-8'>
           <Link className='lobster-regular hidden md:block text-white text-5xl' to={"/"}>
             Q
           </Link>

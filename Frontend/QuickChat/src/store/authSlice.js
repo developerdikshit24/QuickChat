@@ -41,7 +41,6 @@ export const loginThunk = createAsyncThunk('auth/login', async (data, { dispatch
         dispatch(connectSocketThunk(res.data.data.user._id));
         return res.data.data;
     } catch (err) {
-        console.log(err.response.data)
         toast.error(extractErrorMessage(err.response.data) || 'Login failed');
         return rejectWithValue(extractErrorMessage(err.response.data) || 'Login failed');
     }
@@ -136,7 +135,6 @@ export const disconnectSocketThunk = () => (dispatch) => {
     if (socketInstance) {
         socketInstance.disconnect();
         socketInstance = null;
-        console.log('🔌 Socket disconnected');
     }
     dispatch(disconnectSocket());
 };

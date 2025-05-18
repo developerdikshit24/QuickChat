@@ -105,7 +105,7 @@ const Profile = () => {
       setLoading(false);
     }
   };
-  
+
 
 
   return (
@@ -115,14 +115,28 @@ const Profile = () => {
         <input type="file" ref={fileInputRef} onChange={handleFileChange} className='hidden' />
         <div className='flex justify-center mt-7'>
           <div className='relative w-20 h-20 md:w-28 md:h-28 rounded-full'>
-            <img className='w-full h-full object-cover rounded-full' src={userData.profilePicture} alt="" />
-            {loading && <div className='bg-black/5 rounded-full w-full h-full z-50 top-2/2 left-1/2 transform -translate-1/2  absolute '><span className="loading top-2/2 left-1/2 transform -translate-1/2  absolute   loading-spinner loading-md"></span></div>}
-            <button className='absolute z-50 text-sm md:text-xl cursor-pointer text-white right-0 bottom-0 bg-purple-700 rounded-full p-2' onClick={handleClick}>
+            <img
+              className='w-full h-full object-cover rounded-full'
+              src={userData.profilePicture}
+              alt="Profile"
+            />
+
+            {loading && (
+              <div className='absolute inset-0 bg-black/50 rounded-full flex items-center justify-center z-40'>
+                <span className="loading loading-spinner loading-md text-primary"></span>
+              </div>
+            )}
+
+            <button
+              className='absolute z-50 text-sm md:text-xl cursor-pointer text-white right-0 bottom-0 bg-purple-700 rounded-full p-2'
+              onClick={handleClick}
+            >
               <FaPlus />
             </button>
           </div>
         </div>
       </div>
+
 
       {showCropper && (
         <div className='fixed inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center z-50'>
@@ -150,7 +164,7 @@ const Profile = () => {
         <form onSubmit={handleSubmit(updateUserDetails)} className="flex flex-col justify-center items-center mt-8 pb-28">
           <label className='w-10/12 sm:sm:text-xxs md:text-base'>
             {"Name"}
-            <label className={`input px-0 bg-base-300 h-7 md:h-10 border-none w-full validator mt-2 mb-7 md:mb-12`}>
+            <label className={`input px-0 bg-base-300 h-7 md:h-10  border-2  w-full validator mt-2 mb-7 md:mb-12`}>
               <input {...register('name', { required: "Name is required" })} type={"text"} disabled={inputDisable?.field1} className={`p-2 bg-base-300 sm:text-xxs md:text-base border-none focus:outline-none`} />
               <AiOutlineEdit onClick={() => { toggleField('field1') }} className={`md:mr-3.5 mr-1.5 md:ml-2 cursor-pointer`} />
             </label>
@@ -158,7 +172,7 @@ const Profile = () => {
 
           <label className='w-10/12 sm:text-xxs md:text-base'>
             {"Bio"}
-            <label className={`input px-0 h-7 md:h-10 cursor-pointer bg-base-300 border-none w-full validator mt-2 mb-7 md:mb-12`}>
+            <label className={`input px-0 h-7 md:h-10 cursor-pointer  border-2 bg-base-300  w-full validator mt-2 mb-7 md:mb-12`}>
               <input {...register('bio')} type={"text"} disabled={inputDisable?.field2} className={`p-2 bg-base-300 sm:text-xxs md:text-base border-none focus:outline-none`} />
               <AiOutlineEdit onClick={() => { toggleField('field2') }} className={`md:mr-3.5 mr-1.5 md:ml-2 cursor-pointer`} />
             </label>
@@ -178,7 +192,7 @@ const Profile = () => {
             </label>
           </label>
 
-          {shouldShowBtn && <button type="submit" className="bg-purple-800 sm:text-xxs md:text-base px-8 py-2 md:py-3 rounded-lg">Save</button>}
+          {shouldShowBtn && <button type="submit" className="bg-purple-800 text-white sm:text-xxs md:text-base px-8 py-2 md:py-3 rounded-lg">Save</button>}
         </form>
       </div>
     </div>

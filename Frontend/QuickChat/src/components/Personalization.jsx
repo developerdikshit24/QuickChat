@@ -27,7 +27,7 @@ const Personalization = () => {
 
   return (
     <div className='p-4'>
-      <div>Chat Background</div>
+      <div className='mb-4'>Chat Background</div>
       <div className='flex flex-wrap gap-2 md:gap-4 p-4 md:p-8'>
         {backgrounds.map((bg, index) => (
           <button
@@ -36,7 +36,7 @@ const Personalization = () => {
             className={`
               md:w-16 md:h-16 h-10 w-10 rounded-md box-border 
               ${bg.style} 
-              ${selectedBg === bg.id ? 'ring-2 ring-purple-500' : ''}
+              ${selectedBg === bg.id ? 'ring-2 ring-purple-500' : 'border-1 border-gray-700'}
             `}
           ></button>
         ))}

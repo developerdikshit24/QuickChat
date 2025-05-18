@@ -8,6 +8,7 @@ import { FaTimes } from 'react-icons/fa';
 import { VscArrowSmallLeft } from "react-icons/vsc";
 import MessageSkeleton from './MessageSkeleton.jsx';
 import ReactMarkdown from 'react-markdown';
+import toast from 'react-hot-toast';
 
 
 
@@ -63,6 +64,16 @@ const ChatContainer = () => {
         })
 
     }
+    const handleUpComming = () => {
+        toast((t) => (
+            <span>
+               Features <b>Coming Soon! </b>
+                <button className='btn btn-ghost' onClick={() => toast.dismiss(t.id)}>
+                    Dismiss
+                </button>
+            </span>
+          ));
+    }
 
     if (loading) return <MessageSkeleton />
     return (
@@ -72,7 +83,7 @@ const ChatContainer = () => {
                     <div className='p-3'>
                         <div className='flex items-center flex-1 gap-2'>
                             <button onClick={() => dispatch(diselectChat())} className='text-base-content  rounded hover: transition'>
-                                <VscArrowSmallLeft className='w-12 cursor-pointer hover:bg-purple-500/20 rounded-full h-full' />
+                                <VscArrowSmallLeft className='w-12 cursor-pointer text-white hover:bg-purple-500/20 rounded-full h-full' />
                             </button>
                             <img className='rounded-full h-11 w-11 md:h-12 md:w-12' src={`${selectedChatUser.profilePicture}`} alt="" />
                             <div className='w-full flex justify-between items-center '>
@@ -82,15 +93,15 @@ const ChatContainer = () => {
                                 </div>
 
                                 <div>
-                                    <button className='hover:bg-purple-500/20 p-1 rounded-md ' onClick={() => setuserOption(!userOption)}>
+                                    <button className='hover:bg-purple-500/20 md:p-1 rounded-md ' onClick={() => setuserOption(!userOption)}>
                                         <img className='h-6 w-6 md:w-8 md:h-8 cursor-pointer  invert' src="/images/Three-Dots.png" alt="" />
                                     </button>
                                 </div>
 
                                 {userOption && (
                                     <div ref={menuRef} className='flex flex-col rounded-md overflow-hidden justify-center items-center bg-base-00 z-20 absolute right-5 top-6 shadow-lg transition transform origin-top-right scale-100'>
-                                        <button disabled className='px-5 py-3 w-full bg-base-300 text-xs pb-3 cursor-pointer hover:text-purple-500 hover:bg-base-100'>View Profile</button>
-                                        <button disabled className='px-5 py-3 w-full bg-base-300 text-xs pb-3 cursor-pointer hover:text-purple-500 hover:bg-base-100'>Block</button>
+                                        <button onClick={handleUpComming} className='px-5 py-3 w-full bg-base-300 text-xs pb-3 cursor-pointer hover:text-purple-500 hover:bg-base-100'>View Profile</button>
+                                        <button onClick={handleUpComming} className='px-5 py-3 w-full bg-base-300 text-xs pb-3 cursor-pointer hover:text-purple-500 hover:bg-base-100'>Block</button>
                                         <button onClick={() => { setClearChatOption(true); setuserOption(false) }} className='px-5 py-3 w-full bg-base-300 text-xs pb-3 cursor-pointer hover:text-purple-500 hover:bg-base-100'>Clear Chat</button>
                                     </div>
                                 )}
@@ -99,7 +110,7 @@ const ChatContainer = () => {
                     </div>
                 </div>
 
-                <div className={`${chatTheme} h-[calc(100%-9rem)] overflow-y-auto scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}>
+                <div className={`${chatTheme} h-[calc(100%-9rem)] relative overflow-y-auto scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}>
                     <div className={`p-4 flex flex-col `}>
                         {userChat.map((item) => (
                             <div ref={messageEndRef} key={item._id}>

@@ -12,10 +12,10 @@ const Input = ({
 }) => {
     return (
         <div>
-            <label className='text-gray-50 text-md md:text-base font-bold' htmlFor={label}>
+            <label className=' text-md md:text-base font-bold' htmlFor={label}>
                 {label}
             </label>
-            <label className="input w-full validator mt-2">
+            <label className="input w-full validator mt-0.5 md:mt-2 ">
                 <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox={size}>
                     {icon}
                 </svg>
@@ -29,7 +29,7 @@ const Input = ({
                     className={className}
                 />
             </label>
-            {ErrorMsg && <p className="validator-hint text-xxs pb-1 text-red-500">{ErrorMsg}</p>}
+            {ErrorMsg && <p className="validator-hint mt-0.5 text-xxs pb-1 text-red-500">{ErrorMsg}</p>}
         </div>
     );
 };

@@ -80,7 +80,6 @@ const getSideBarMessages = asyncHandler(async (req, res) => {
             .status(200)
             .json(new ApiResponse(200, messages, "Recent chat users with last messages"));
     } catch (error) {
-        console.error(error);
         return res.status(500).json(new ApiError(500, "Something went wrong"));
     }
 });
@@ -121,8 +120,8 @@ const sentMessages = asyncHandler(async (req, res) => {
         if (receiverSocketId) {
             io.to(receiverSocketId).emit("newMessage", newMessage);
             io.to(receiverSocketId).emit("getNewMsg");
+            io.to(senderId).emit("getNewMsg");
         }
-        io.to(senderId).emit("getNewMsg");
 
         res.status(200).json(new ApiResponse(200, newMessage, "Message sent successfully"));
 
@@ -148,7 +147,6 @@ const sentMessages = asyncHandler(async (req, res) => {
         }
 
     } catch (error) {
-        console.error("Message error:", error);
         return res.status(500).json(new ApiError(500, error));
     }
 });
@@ -163,7 +161,7 @@ const getUserChats = asyncHandler(async (req, res) => {
             { senderId: id, receiverId: LoggedUser },
             { receiverId: id, senderId: LoggedUser }
         ],
-        deletedBy: { $ne: LoggedUser } 
+        deletedBy: { $ne: LoggedUser }
     }).sort({ createdAt: 1 }).lean()
 
     if (!getChat) throw new ApiError(400, "Chat Not Found")
@@ -201,11 +199,11 @@ const deleteChats = asyncHandler(async (req, res) => {
         const messagesToDelete = [];
 
         for (let msg of messages) {
-            if (msg.deletedBy.includes(senderId)) continue; 
+            if (msg.deletedBy.includes(senderId)) continue;
 
             msg.deletedBy.push(senderId);
 
-            const bothDeleted = msg.deletedBy.includes(senderId.toString()) &&(receiverId === process.env.QUICKCHATAI_USERID || msg.deletedBy.includes(receiverId.toString()));
+            const bothDeleted = msg.deletedBy.includes(senderId.toString()) && (receiverId === process.env.QUICKCHATAI_USERID || msg.deletedBy.includes(receiverId.toString()));
 
             if (bothDeleted) {
                 messagesToDelete.push(msg._id);
@@ -220,9 +218,8 @@ const deleteChats = asyncHandler(async (req, res) => {
             for (const msg of messagesToDelete) {
                 const message = await Message.findById(msg)
                 if (message.media && message.media.length > 0) {
-                    console.log("Deleting media for message:", message._id);
                     const cloudRes = await deleteFromCloud(message.media, 'image');
-                    if(!cloudRes) throw new ApiError(400, {}, "Internal Server Error")
+                    if (!cloudRes) throw new ApiError(400, {}, "Internal Server Error")
                 }
             }
             await Message.deleteMany({ _id: { $in: messagesToDelete } });
@@ -231,7 +228,7 @@ const deleteChats = asyncHandler(async (req, res) => {
         await User.findByIdAndUpdate(receiverId, { lastMessage: "" });
 
         const senderSocketId = getReceiverSocketId(senderId);
-        
+
         io.to(senderSocketId).emit("chatDeleted", receiverId);
 
         return res.status(200).json(new ApiResponse(200, {}, "Messages deleted from your view"));
@@ -259,7 +256,6 @@ const chatWithAi = async (content) => {
 
         return response.data.choices[0].message.content;
     } catch (error) {
-        console.error("AI Error:", error.response?.data || error.message);
         return "Sorry, I couldn't generate a response.";
     }
 

@@ -16,21 +16,18 @@ const Login = () => {
   const { register, handleSubmit, reset } = useForm()
   const Navigate = useNavigate()
   const loginUser = async (data) => {
-    setLoading(true)
     try {
       dispatch(loginThunk(data))
-      Navigate("/")
+        .then(() => { Navigate("/") })
     } catch (error) {
       toast.error(extractErrorMessage(error.response.data))
-    } finally {
-      reset()
-      setLoading(false)
     }
+    setLoading(false)
+    reset()
   }
-
+  if (Loading) { return <ScreenLoader /> }
   return (
     <>
-      {Loading && <ScreenLoader />}
       <div className='w-full h-screen fixed'>
         <div className="w-full">
           <div className=" w-full flex-row justify-center h-screen items-center flex">
@@ -38,8 +35,8 @@ const Login = () => {
               <AuthImagePattern title={"Welcome back..!"}
                 subtitle={"Dive into your conversations, reconnect with your friends, and never miss a moment."}
               /></div>
-            <div className=' w-full lg:w-6/12 flex flex-col h-screen bg-base-100 justify-center items-center'>
-              <div className='flex justify-center md:w-3/5 xl:1/3 items-center flex-col'>
+            <div className='w-full lg:w-6/12 flex flex-col h-screen bg-base-100 justify-start lg:justify-center items-center pt-20 lg:pt-0'>
+              <div className='flex justify-center w-5/6 md:w-3/5 xl:1/3 items-center flex-col'>
                 <div className="flex justify-center gap-4 mb-4">
                   <div className="relative">
                     <div

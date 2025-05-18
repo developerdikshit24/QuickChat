@@ -56,8 +56,8 @@ const Setting = () => {
 
       <div className='w-full h-full bg-base-300'>
         <div className='flex justify-between bg-base-100 items-center p-4 md:p-5'>
-          <div className='text-xs md:text-base'>{activeBar}</div>
-          <button className='cursor-pointer text-xs md:text-base' onClick={() => dispatch(hideSetting())}>
+          <div className='text-sm md:text-base'>{activeBar}</div>
+          <button className='cursor-pointer text-sm md:text-base' onClick={() => dispatch(hideSetting())}>
             <FaTimes />
           </button>
         </div >
