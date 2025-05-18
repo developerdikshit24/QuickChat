@@ -3,9 +3,14 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors'
 import http from "http"
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 const app = express();
 export const httpServer = http.createServer(app)
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 app.use(cors({
     origin: `${process.env.CORS_ORIGIN}`,
