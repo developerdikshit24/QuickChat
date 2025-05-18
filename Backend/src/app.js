@@ -35,10 +35,14 @@ app.use("/api/v1/messages", messageRouter)
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, "../../Frontend/QuickChat/dist")))
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, "../../Frontend", "QuickChat", "dist", "index.html"))
+    // Handle client-side routing - only match routes that aren't API routes
+    app.get('/*', (req, res) => {
+        // Don't handle API routes here
+        if (req.url.startsWith('/api/')) {
+            return res.status(404).json({ error: 'API endpoint not found' });
+        }
+        res.sendFile(path.join(__dirname, "../../Frontend/QuickChat/dist/index.html"))
     })
 }
-
 
 export { app }
