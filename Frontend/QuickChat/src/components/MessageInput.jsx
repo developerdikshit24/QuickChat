@@ -6,12 +6,13 @@ import { listenMsg, sendMsgThunk } from "../store/ChatSlice.js"
 import { useSelector, useDispatch } from 'react-redux'
 const MessageInput = () => {
     const dispatch = useDispatch()
-    const { handleSubmit, register, reset, watch } = useForm()
+    const { handleSubmit, register, reset, watch,  } = useForm()
     const [imagePreview, setImagePreview] = useState("")
     const [originalUrl, setOriginalUrl] = useState({})
     const fileInputRef = useRef(null)
     const sendMsgUser = useSelector(state => state.Chat.selectedUser)
     const [imgLoading, setImgLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const text = watch("content")
     const handleClick = () => {
         setImagePreview("")
@@ -34,12 +35,14 @@ const MessageInput = () => {
         e.target.value = null;
     }
     const handleSendMsg = (data) => {
+        reset()
+        setLoading(true)
         setImgLoading(true)
         dispatch(sendMsgThunk({ user: sendMsgUser._id, data: { content: data.content, media: originalUrl } }))
             .then(() => {
                 setImgLoading(false)
+                setLoading(false)
                 setImagePreview("")
-                reset()
                 setOriginalUrl("")
             })
     }
@@ -70,16 +73,10 @@ const MessageInput = () => {
                     placeholder="Type a message..."
                     className='flex-1 input w-full h-9 md:h-10 bg-base-200 focus:outline-none'
                     {...register('content')}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                            e.preventDefault();   // Prevent newline
-                            handleSubmit(handleSendMsg)(); // Explicitly call submit
-                        }
-                    }}
                 />
 
-                <button type="submit" disabled={!(text || imagePreview)} className='btn cursor-pointer bg-purple-700 btn-circle w-9 h-9  md:w-12 md:h-12'>
-                    <img src="images/SendMsg.png" className='invert w-5 h-5 md:w-6 md:h-6' alt="Send message" />
+                <button type="submit" disabled={loading || !(text?.trim() || imagePreview)} className='btn cursor-pointer bg-purple-700 btn-circle w-9 h-9  md:w-12 md:h-12'>
+                    {loading ? <span className="loading loading-spinner loading-md text-white"></span> : <img src="images/SendMsg.png" className='invert w-5 h-5 md:w-6 md:h-6' alt="Send message" />}
                 </button>
             </form>
 

@@ -146,7 +146,8 @@ const InitialState = {
     checkAuth: true,
     socketId: null,
     onlineUsers: [],
-    isUpdatingProfile: false
+    isUpdatingProfile: false,
+    isAuthenticating: false
 };
 
 const authSlice = createSlice({
@@ -180,14 +181,31 @@ const authSlice = createSlice({
                 state.checkAuth = false;
             })
 
+            .addCase(loginThunk.pending, (state, action) => {
+                state.isAuthenticating = true
+            })
+            
             .addCase(loginThunk.fulfilled, (state, action) => {
                 state.success = true;
                 state.userData = action.payload;
+                state.isAuthenticating = false
             })
 
+            .addCase(loginThunk.rejected, (state, action) => {
+                state.isAuthenticating = false
+            })
+
+            .addCase(registerThunk.pending, (state, action) => {
+                state.isAuthenticating = true
+            })
+            
             .addCase(registerThunk.fulfilled, (state, action) => {
                 state.userData = action.payload;
                 state.success = true;
+                state.isAuthenticating = false
+            })
+            .addCase(registerThunk.rejected, (state, action) => {
+                state.isAuthenticating = false
             })
 
             .addCase(logoutThunk.fulfilled, (state) => {

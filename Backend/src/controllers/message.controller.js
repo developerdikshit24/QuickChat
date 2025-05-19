@@ -120,8 +120,8 @@ const sentMessages = asyncHandler(async (req, res) => {
         if (receiverSocketId) {
             io.to(receiverSocketId).emit("newMessage", newMessage);
             io.to(receiverSocketId).emit("getNewMsg");
-            io.to(senderId).emit("getNewMsg");
         }
+        io.to(senderId).emit("getNewMsg");
 
         res.status(200).json(new ApiResponse(200, newMessage, "Message sent successfully"));
 

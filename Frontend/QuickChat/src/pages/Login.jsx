@@ -3,7 +3,7 @@ import Input from '../components/Input'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthImagePattern from "../components/AuthImagePattern.jsx"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { loginThunk } from '../store/authSlice.js';
 import toast from 'react-hot-toast'
 import { extractErrorMessage } from '../constant.js'
@@ -11,7 +11,7 @@ import ScreenLoader from '../components/ScreenLoader.jsx'
 import { MessageSquare } from "lucide-react";
 
 const Login = () => {
-  const [Loading, setLoading] = useState(false)
+  const loading = useSelector(state => state.auth.isAuthenticating)
   const dispatch = useDispatch()
   const { register, handleSubmit, reset } = useForm()
   const Navigate = useNavigate()
@@ -22,10 +22,9 @@ const Login = () => {
     } catch (error) {
       toast.error(extractErrorMessage(error.response.data))
     }
-    setLoading(false)
     reset()
   }
-  if (Loading) { return <ScreenLoader /> }
+  if (loading) { return <ScreenLoader /> }
   return (
     <>
       <div className='w-full h-screen fixed'>

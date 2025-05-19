@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from '../components/Input.jsx'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthImagePattern from "../components/AuthImagePattern.jsx"
 import { registerThunk } from '../store/authSlice.js';
@@ -10,6 +10,7 @@ import { extractErrorMessage } from "../constant.js"
 import { MessageSquare } from "lucide-react";
 const Signup = () => {
     const dispatch = useDispatch()
+    const loading = useSelector(state => state.auth.isAuthenticating)
     const { register, handleSubmit, reset } = useForm()
     const Navigate = useNavigate()
     const createAccount = async (data) => {
@@ -23,7 +24,7 @@ const Signup = () => {
             reset()
         }
     }
-
+    if (loading) { return <ScreenLoader /> }
     return (
         <div className='w-full h-screen fixed'>
             <div className="w-full">

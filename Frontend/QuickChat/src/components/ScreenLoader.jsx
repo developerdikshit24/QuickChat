@@ -2,7 +2,7 @@ import { MessageSquare } from "lucide-react"
 
 const ScreenLoader = () => {
   return (
-    <div className="absolute inset-0 z-50 flex items-center overflow-y justify-center bg-black/80 bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
       <div className={`w-full h-screen flex rounded-md flex-1 flex-col items-center justify-center p-16 bg-base-300`} >
         <div className="max-w-md text-center space-y-6">
           <div className="flex justify-center gap-4 mb-2">
