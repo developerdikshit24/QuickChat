@@ -11,8 +11,6 @@ import ReactMarkdown from 'react-markdown';
 import toast from 'react-hot-toast';
 
 
-
-
 const ChatContainer = () => {
     const dispatch = useDispatch()
     const [userOption, setuserOption] = useState(false);
