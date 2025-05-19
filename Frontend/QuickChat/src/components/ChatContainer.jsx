@@ -76,7 +76,7 @@ const ChatContainer = () => {
     if (loading) return <MessageSkeleton />
     return (
         <>
-            <div className={`h-full flex-1 overflow-hidden rounded-md relative bg-base-300 text-base-content transition-all duration-300 ease-in-out ${selectedChatUser ? 'block w-full xl:block' : 'hidden xl:block'}`}>
+            <div className={`flex-1 overflow-hidden rounded-md relative bg-base-300 text-base-content transition-all duration-300 ease-in-out ${selectedChatUser ? 'block w-full xl:block' : 'hidden xl:block'}`}>
                 <div className='w-full h-20 bg-purple-950 sticky top-0 z-10'>
                     <div className='p-3'>
                         <div className='flex items-center flex-1 gap-2'>
