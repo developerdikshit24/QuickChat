@@ -21,16 +21,14 @@ const Home = () => {
     }, [chatOption]);
 
     return (
+
         <div className='flex w-full h-screen justify-center items-stretch gap-5 p-2 md:p-5'>
 
-            <div className='flex flex-1 overflow-hidden gap-3'>
-                {activeTab === 'Chat' && <SideBar />}
-                {activeTab === 'AddUser' && <AllUser />}
-                {activeTab === 'QuickAi' && <QuickAi />}
-                <div className="flex-1 overflow-y-auto">
-                    {selectedChat ? <ChatContainer /> : <NoChatSelected />}
-                </div>
-            </div>
+            {activeTab === 'Chat' && <SideBar />}
+            {activeTab === 'AddUser' && <AllUser />}
+            {activeTab === 'QuickAi' && <QuickAi />}
+            {selectedChat ? <ChatContainer /> : <NoChatSelected />}
+
         </div>
     );
 }
