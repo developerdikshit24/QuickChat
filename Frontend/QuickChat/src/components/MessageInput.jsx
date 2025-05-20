@@ -50,7 +50,7 @@ const MessageInput = () => {
         <div className='sticky bottom-0  left-0 rounded-md  right-0 bg-base-100 p-4 border-t border-base-200'>
             {imagePreview && <div className='max-w-28 flex justify-center  max-h-28 bg-base-300 mb-4 relative rounded-md'>
                 <img className='max-h-28 rounded-md bg-center max-w-28 overflow-hidden' src={imagePreview} alt="ImgPreview" />
-                <div onClick={() => { setImagePreview(""), setOriginalUrl("") }} className='bg-black/70 cursor-pointer z-40 absolute -top-2 -right-2 p-1 rounded-full'><FaTimes /></div>
+                <div onClick={() => { setImagePreview(""), setOriginalUrl("") }} className='bg-black/70 cursor-pointer z-40 absolute -top-2 text-white -right-2 p-1 rounded-full'><FaTimes /></div>
                 {imgLoading && <div className='bg-black/50 w-full h-full rounded-md  top-1/2 left-1/2 transform -translate-1/2  absolute '><span className="loading top-1/2 left-1/2 transform -translate-1/2  absolute   loading-spinner loading-md"></span></div>}
             </div>}
 

@@ -124,7 +124,7 @@ const ChatContainer = () => {
                                         </div>
                                     </div>
                                     <div className={`chat-bubble break-words mb-1  ${item.senderId === selectedChatUser._id ? 'bg-[#2e0548] text-white' : 'bg-base-100 text-'} `}>
-                                        {item.media && <img onClick={() => { handleClickImg(item.media) }} className='max-w-64 max-h-60 pb-2' src={item.media} alt="" />}
+                                        {item.media && <img onClick={() => { handleClickImg(item.media) }} className='max-w-64 w-full h-auto max-h-60 pb-2' src={item.media} alt="" />}
                                         <ReactMarkdown
                                             children={item.content}
                                             components={{
@@ -152,9 +152,9 @@ const ChatContainer = () => {
                     </div>
                 </div>
                 <MessageInput />
-                {openImg && <div className='w-full absolute top-0 left-0 flex justify-center transform ease-in-out delay-500 items-center h-full bg-black/60'>
-                    <div onClick={() => { setOpenImg("") }} className='absolute cursor-pointer top-0 right-8'><FaTimes className='w-6 h-6 ' /></div>
-                    <div className='h-full max-w-full p-5 flex'><img src={openImg} alt="" /></div></div>}
+                {openImg && <div className='w-full absolute top-0 md:top-4 left-0 flex justify-center transform ease-in-out delay-500 items-center h-full bg-black/60'>
+                    <div onClick={() => { setOpenImg("") }} className='absolute cursor-pointer top-3 right-8'><FaTimes className='w-6 h-6 text-white' /></div>
+                    <div className='max-h-full md:h-full max-w-full p-5 flex'><img src={openImg} alt="" /></div></div>}
 
             </div>
             {clearChatOption && <div className='absolute w-full h-screen top-0 left-0 bg-black/35 flex items-center justify-center'>
