@@ -47,7 +47,7 @@ const MessageInput = () => {
             })
     }
     return (
-        <div className='fixed md:absolute bottom-0  left-0 rounded-md  right-0 bg-base-100 p-4 border-t border-base-200'>
+        <div className='sticky bottom-0  left-0 rounded-md  right-0 bg-base-100 p-4 border-t border-base-200'>
             {imagePreview && <div className='max-w-28 flex justify-center  max-h-28 bg-base-300 mb-4 relative rounded-md'>
                 <img className='max-h-28 rounded-md bg-center max-w-28 overflow-hidden' src={imagePreview} alt="ImgPreview" />
                 <div onClick={() => { setImagePreview(""), setOriginalUrl("") }} className='bg-black/70 cursor-pointer z-40 absolute -top-2 -right-2 p-1 rounded-full'><FaTimes /></div>

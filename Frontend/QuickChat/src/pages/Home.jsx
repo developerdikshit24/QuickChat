@@ -22,7 +22,7 @@ const Home = () => {
 
     return (
 
-        <div className='flex w-full h-screen justify-center items-stretch gap-5 p-2 md:p-5'>
+        <div className='flex w-full h-[100svh] justify-center overflow-hidden items-stretch gap-5 p-2 md:p-5'>
 
             {activeTab === 'Chat' && <SideBar />}
             {activeTab === 'AddUser' && <AllUser />}
