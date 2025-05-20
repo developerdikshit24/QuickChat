@@ -67,20 +67,20 @@ const ChatContainer = () => {
     const handleUpComming = () => {
         toast((t) => (
             <span>
-               Features <b>Coming Soon! </b>
+                Features <b>Coming Soon! </b>
                 <button className='btn btn-ghost' onClick={() => toast.dismiss(t.id)}>
                     Dismiss
                 </button>
             </span>
-          ));
+        ));
     }
 
     if (loading) return <MessageSkeleton />
     return (
         <>
-            <div className={`h-full flex-1 overflow-hidden rounded-md relative bg-base-300 text-base-content transition-all duration-300 ease-in-out ${selectedChatUser ? 'block w-full xl:block' : 'hidden xl:block'}`}>
-                <div className='w-full h-20 bg-purple-950'>
-                    <div className='p-3'>
+            <div className={`h-full flex-1 md:pt-4 overflow-hidden rounded-md relative bg-base-300 text-base-content transition-all duration-300 ease-in-out ${selectedChatUser ? 'block w-full xl:block' : 'hidden xl:block'}`}>
+                <div className='w-full h-20  bg-purple-950'>
+                    <div className='p-3 '>
                         <div className='flex items-center flex-1 gap-2'>
                             <button onClick={() => dispatch(diselectChat())} className='text-base-content  rounded hover: transition'>
                                 <VscArrowSmallLeft className='w-12 cursor-pointer text-white hover:bg-purple-500/20 rounded-full h-full' />
