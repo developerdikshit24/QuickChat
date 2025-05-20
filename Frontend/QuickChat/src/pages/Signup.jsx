@@ -26,7 +26,7 @@ const Signup = () => {
     }
     if (loading) { return <ScreenLoader /> }
     return (
-        <div className='w-full h-screen fixed'>
+        <div className='w-full h-[100svh] fixed'>
             <div className="w-full">
                 <div className=" w-full flex-row justify-center h-screen items-center flex">
                     <div className='w-full lg:w-6/12 flex flex-col h-screen bg-base-100 justify-start lg:justify-center items-center pt-10 lg:pt-0'>

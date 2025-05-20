@@ -25,7 +25,7 @@ const SideBar = () => {
     }
     if (loading) return <ScreenLoader />
     return (
-        <div className={`md:h-full h-11/12 relative rounded-md bg-base-300  text-base-content transition-all duration-300 ease-in-out ${selectedUserData ? 'hidden xl:block w-4/12' : 'block w-full xl:w-4/12'}`}>
+        <div className={`md:h-full h-11/12 relative rounded-md bg-base-300 text-base-content transition-all duration-300 ease-in-out ${selectedUserData ? 'hidden xl:block w-4/12' : 'block w-full xl:w-4/12'}`}>
             <div className='flex flex-col h-full '>
                 <div className='flex-shrink-0 '>
                     <div className='px-1 lobster-regular  pb-8 mt-6 justify-between w-full h-20 text-4xl pl-4 font-semibold flex items-center'>
