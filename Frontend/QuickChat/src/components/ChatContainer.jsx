@@ -78,7 +78,7 @@ const ChatContainer = () => {
     if (loading) return <MessageSkeleton />
     return (
         <>
-            <div className={`h-full flex-1 md:pt-4 overflow-hidden rounded-md relative bg-base-300 text-base-content transition-all duration-300 ease-in-out ${selectedChatUser ? 'block w-full xl:block' : 'hidden xl:block'}`}>
+            <div className={`h-full flex-1 ${userChat[0] ? 'md:pt-4':'md:pt-0'} overflow-hidden rounded-md relative bg-base-300 text-base-content transition-all duration-300 ease-in-out ${selectedChatUser ? 'block w-full xl:block' : 'hidden xl:block'}`}>
                 <div className='w-full h-20  bg-purple-950'>
                     <div className='p-3 '>
                         <div className='flex items-center flex-1 gap-2'>
@@ -165,7 +165,7 @@ const ChatContainer = () => {
                     </p>
                     <div className='flex justify-end gap-4 px-2 mt-4'>
                         <button onClick={() => { setClearChatOption(false) }} className='btn btn-ghost'>Cancel</button>
-                        <button onClick={handelDelete} className='btn bg-red-800/75 hover:bg-red-800/90'>{clearChatLoading ? <span className="loading loading-spinner loading-sm"></span> : 'Delete'}</button>
+                        <button onClick={handelDelete} className='btn bg-red-800/75 text-white hover:bg-red-800/90'>{clearChatLoading ? <span className="loading loading-spinner text-white loading-sm"></span> : 'Delete'}</button>
                     </div>
                 </div>
             </div>}
