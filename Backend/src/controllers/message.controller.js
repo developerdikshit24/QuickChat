@@ -243,7 +243,7 @@ const chatWithAi = async (content) => {
         const response = await axios.post(
             process.env.QUICK_URL,
             {
-                model: 'meta-llama/Llama-3-8b-chat-hf',
+                model: 'meta-llama/Llama-4-Scout-17B-16E-Instruct',
                 messages: [{ role: 'user', content: content }],
             },
             {
